@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .button-rot-grad {
+    position: relative;
+    display: inline-block;
+    padding: var(--line-width);
+    background-color: var(--bg-color);
+    overflow: hidden;
+    z-index: 0;
+    box-shadow: 0 0 var(--shadow-spread) var(--glow-color);
+    transition: all var(--transition-speed) ease;
+  }
+
+  .button-rot-grad::before {
+    content: '';
+    position: absolute;
+    top: calc(-150% + var(--line-width));
+    left: calc(-150% + var(--line-width));
+    width: calc(400% - var(--line-width) * 2);
+    height: calc(400% - var(--line-width) * 2);
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      var(--color-a) calc(var(--cone-angle) / 2),
+      var(--color-b) var(--cone-angle),
+      transparent calc(var(--cone-angle) * 1.5),
+      transparent 360deg
+    );
+    animation: rotate var(--rotation-speed) linear infinite;
+  }
+
+  .button-rot-grad .button-content {
+    display: block;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    padding: var(--padding);
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 5px var(--glow-color);
+    transition: all var(--transition-speed) ease;
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+  }
+
+  .button-rot-grad:hover {
+    box-shadow: 0 0 var(--hover-shadow-spread) var(--glow-color);
+    transform: scale(var(--hover-scale));
+  }
+
+  .button-rot-grad:hover .button-content {
+    text-shadow: 0 0 10px var(--glow-color);
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: var(--glow-intensity);
+    }
+    50% {
+      opacity: calc(var(--glow-intensity) * 0.7);
+    }
+  }
+
+  .button-rot-grad::after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--line-width));
+    left: calc(-1 * var(--line-width));
+    right: calc(-1 * var(--line-width));
+    bottom: calc(-1 * var(--line-width));
+    background: var(--glow-color);
+    filter: blur(calc(var(--shadow-spread) / 2));
+    opacity: var(--glow-intensity);
+    z-index: -1;
+    animation: pulse-glow var(--pulse-speed) infinite;
+  }
+}
