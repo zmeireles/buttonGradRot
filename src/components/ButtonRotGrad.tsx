@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ButtonRotGradProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonRotGradProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   colorA?: string;
   colorB?: string;
   backgroundColor?: string;
